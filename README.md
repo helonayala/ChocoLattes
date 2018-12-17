@@ -52,3 +52,24 @@ make_productions_page(lattes.list = lattes.list,
 
 Have fun!!!  
 Felipe
+
+
+
+# fork changes
+
+All credits to Felipe Campelo who kindly made available this very useful set of R script to calculate scientific production
+
+a few tweaks have been made here to plot the publications according to the Qualis classification
+
+specifically I changed a little bit 
+- set_qualis (on the basis of https://github.com/fcampelo/PPGEECred , also from Felipe Campelo - all credits to him)
+- the output html file (2 graphs, 1 according to qualis )
+
+attached there is 1 CV in the data/ folder (the script will look for all cvs there, so just dump all cvs in data folder if there's more than one)
+
+in order to generate the report run `hello.R` in `examples/`. the file `prod_page.html` is the expected output
+
+the qualis classification can be obtained from qualis capes (dump in the data folder too the csv file. in this repo we have Eng. III - 2013-2016)
+
+*this fork contains only minor tweaks. almost all of the work is from Felipe, so once more, all credits and gratitude to him*
+

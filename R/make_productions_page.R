@@ -81,6 +81,7 @@ make_productions_page <- function(lattes.list,
 
   # =============== Write to md file =============== #
   writeLines("---\n    output: html_document\n---\n", con = md.file)
+  # writeLines("---\n    output: html_document\n    always_allow_html: yes\n---\n", con = md.file)
   writeLines(paste0("<h1>", h1.title, "</h1>"), con = md.file)
   writeLines(paste0("<h2>", h2.title, "</h2>\n<hr>\n\n"), con = md.file)
 
@@ -96,7 +97,8 @@ make_productions_page <- function(lattes.list,
   writeLines("for(i in 1:(length(years) - 1)){\ncat(\"[\", years[i], \"](#\",\nyears[i], \") | \",\nsep = \"\")\n}", con = md.file)
   writeLines("cat(\"[\", years[length(years)], \"](#\", years[length(years)], \")\\n\\n\", sep = \"\")", con = md.file)
 
-  writeLines(paste0("plot_chart(lattes.list, chart.type = '", chart.type,
+  # writeLines(paste0("plot_chart(lattes.list, chart.type = '", chart.type,
+  writeLines(paste0("plot_chart2(lattes.list, chart.type = '", chart.type,
                     "', width = ", chart.width,
                     ", height = ", chart.height,
                     ", language = language",
@@ -104,6 +106,18 @@ make_productions_page <- function(lattes.list,
                     paste(which.fields, collapse = "','"), "'))"),
              con = md.file)
   writeLines("cat(\"</p>\")", con = md.file)
+
+
+  writeLines(paste0("plot_chart(lattes.list, chart.type = '", chart.type,
+  # writeLines(paste0("plot_chart2(lattes.list, chart.type = '", chart.type,
+                    "', width = ", chart.width,
+                    ", height = ", chart.height,
+                    ", language = language",
+                    ", which.fields = c('",
+                    paste(which.fields, collapse = "','"), "'))"),
+             con = md.file)
+  writeLines("cat(\"</p>\")", con = md.file)
+
 
   writeLines("for (year in years){", con = md.file)
   writeLines("tmplist <- lapply(lattes.list, function(x,year){x[x$Year == year, ]}, year = year)", con = md.file)
@@ -131,6 +145,7 @@ make_productions_page <- function(lattes.list,
 
   # Render page
   rmarkdown::render(input = "./prod_page.Rmd")
+  # rmarkdown::render(input = "./prod_page.Rmd", rmarkdown::md_document(variant = "markdown_github")) # nao funciona
 
   # remove temp files
   success <- all(file.remove(c("./lattes_list.tmp", "./prod_page.Rmd")))

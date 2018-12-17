@@ -33,6 +33,9 @@ print_journal_papers <- function(x,
             x$DOI[i], ")]",
             sep = "")
       }
+      cat(" Qualis ", x$Qualis[i],
+          sep = "")
+
       cat("\n\n<hr>",
           sep = "")
     }

@@ -20,6 +20,7 @@ get_journal_papers <- function(x,
                         Pages   = character(n.items),
                         Year    = character(n.items),
                         DOI     = character(n.items),
+                        ISSN    = character(n.items),
                         stringsAsFactors = FALSE)
   if (n.items){
     for (i in 1:n.items){
@@ -39,6 +40,10 @@ get_journal_papers <- function(x,
                                     "-",
                                   item$`DETALHAMENTO-DO-ARTIGO`$`PAGINA-FINAL`)
       out.df$Authors[i] <- get_authors(item)
+      out.df$ISSN[i]    <- ifelse(item$`DETALHAMENTO-DO-ARTIGO`[2] == "" |
+                                  item$`DETALHAMENTO-DO-ARTIGO`[2] == " ",
+                                  paste0("zNotAvailable no.", ID, "-", i),
+                                  item$`DETALHAMENTO-DO-ARTIGO`[2])
     }
   }
   return(out.df)
